@@ -161,3 +161,4 @@ cython_debug/
 
 *.csv
 */api_keys.py
+*.DS_Store
