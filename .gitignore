@@ -160,6 +160,8 @@ cython_debug/
 #.idea/
 
 *.csv
-*/api_keys.py
+*.feather
+api_keys.py
+loginkey.py
 *.DS_Store
 */login
