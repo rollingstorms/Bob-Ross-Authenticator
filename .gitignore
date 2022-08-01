@@ -165,3 +165,5 @@ api_keys.py
 loginkey.py
 *.DS_Store
 */login
+data/
+databackup
