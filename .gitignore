@@ -166,4 +166,5 @@ loginkey.py
 *.DS_Store
 */login
 data/
-databackup
+databackup/
+images/
