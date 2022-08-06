@@ -45,6 +45,8 @@ The final model has over 90% validation accuracy for determining whether an artw
 
 Since we slice up each image into tiles before training our model, we will need to do the same when predicting any additional works that go through the model. We created a helper function that slices up each image, takes 10 tiles with the highest informational entropy, and predicts the artist based on the mean of those 10 predictions. Therefore, by pooling the predictions of each tile, even if the accuracy of the model is 95%, the final accuracy will be the equivalent of multiplying that 95% accuracy probability ten times, which would lead to a 59% approximate accuracy overall. If selecting fewer tiles when predicting each work, the model is more accurate but uses much less information for prediction.
 
+![](img/predictions-1.png)
+
 # Results 
 
 According to our test set, our model is able to correctly classify whether a painting is an original Bob Ross painting with over 85% accuracy, even when the painting is in the 'Bob Ross Style' or painted under his instruction. 
