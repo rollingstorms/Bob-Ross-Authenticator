@@ -1,8 +1,8 @@
 # Bob Ross or Not?
 
-# Detecting Imitations of Bob Ross Paintings using Convolution Neural Networks
+# Authenticating Bob Ross Paintings using Convolutional Neural Networks
 
-|![](mike/img/bob-ross.gif) |
+|![](img/bob-ross.gif) |
 | :-: |
 | Bob Ross painting on his show, The Joy of Painting |
 
@@ -23,17 +23,23 @@ When it comes to detecting fakes in artworks, it would be ideal to use extremely
 
 # Problems and Possible Solutions
 
-![](mike/img/happy-accidents.gif)
+![](img/happy-accidents.gif)
 
 Our training set is very small, and there is a massive class imbalance between real Bob Ross paintings and paintings by imitators. Also, some images are high resolution, and downsampling these images before insertion into the neural network, leads to a loss of information that could be important in modeling and determining the true artist.
 
-In order to create a larger training set and improve the accuracy of the model, we implemented an idea from this [article](https://spectrum.ieee.org/the-rembrandt-school-of-ai-an-algorithm-that-detects-art-forgery) that found a possible solution to the class imbalance and small training set problem for detecting fakes of artworks. First, we slice up the images into small tiles samples of each painting. Then we take the tiles with the highest entropies, using Claude Shannon's formula for information content, and add those to the training set. By using subsets of the information of each painting, the model focuses on the details of each painting, without having to downsample an entire high-resolution painting to a small image that can be inserted into the neural network. In effect, we use the parts of the painting that have the highest levels of information while also multiplying the size of the training set by many times.
+In order to create a larger training set and improve the accuracy of the model, we implemented an idea from this [article](https://spectrum.ieee.org/the-rembrandt-school-of-ai-an-algorithm-that-detects-art-forgery) that found a possible solution to the class imbalance and small training set problem for detecting fakes of artworks. First, we slice up the images into small tiles samples of each painting. Then we take the tiles with the highest entropies, using Claude Shannon's formula for information content, and add those to the training set.
+
+![](img/entropy-image.png)
+
+By using subsets of the information of each painting, the model focuses on the details of each painting, without having to downsample an entire high-resolution painting to a small image that can be inserted into the neural network. In effect, we use the parts of the painting that have the highest levels of information while also multiplying the size of the training set by many times.
+
+![](img/bob-ross-infinite.gif)
 
 # Our Model
 
 For this experiment, we used a multi-layer convolutional neural network with 4 convolutional layers followed by max pooling layers. After the convolutional layers, I used one fully connected layer before the final one-node layer that determines the authenticity of each artwork. Additionally, we added a dropout layer of 10% after the first convolutional layer.
 
-The final model has around 95% validation accuracy for determining whether an artwork is by Bob Ross or not.
+The final model has over 90% validation accuracy for determining whether an artwork is by Bob Ross or not.
 
 # Predictions
 
@@ -41,7 +47,7 @@ Since we slice up each image into tiles before training our model, we will need 
 
 # Results 
 
-According to our test set, our model is able to correctly classify whether a painting is an original Bob Ross painting with over 90% accuracy, even when the painting is in the 'Bob Ross Style' or painted under his instruction. 
+According to our test set, our model is able to correctly classify whether a painting is an original Bob Ross painting with over 85% accuracy, even when the painting is in the 'Bob Ross Style' or painted under his instruction. 
 
 We believe this model proves that an artist's style and unique way of creating is not duplicatable, and that machine learning can be used to detect forgeries in artworks. Even when an artwork closely resembles the original artwork or artist, our model can correctly classify the artist's handiwork.
 
@@ -49,5 +55,5 @@ Moreover, we believe this method has wide ranging implications in the field of i
 
 Our next steps, include augmenting our dataset with higher quality images of the work of Bob Ross, as well as extending this model to detect the forgeries of other major artists that have limited dataset or small samples of work publicly available.
 
-![](mike/img/bob-ross-next-week.gif)
+![](img/bob-ross-next-week.gif)
 
